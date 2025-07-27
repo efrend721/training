@@ -1,41 +1,33 @@
-import { useState, useMemo,  } from "react";
+import { useReducer } from "react";
 import "./App.css";
-import { useCallback } from "react";
 
-function App() {
-  const [name, setName] = useState("Ervis");
-  //const refButton = useRef(null);
-
-  /*useEffect(() => {
-    console.log("rendered");
-    return () => {};
-  }, [name]);
-  */
-
-  const changedName = useMemo(() => {
-    return `Hola ${name}`;
-  }, [name]);
-
-
-  const handleClick = useCallback(() => {
-    setName("Pedro");
-  }, [name]);
-
-  return (
-    <div className="App">
-      <h1>Hola, {name}!</h1>
-      <ChangeName changeName={handleClick} />
-    </div>
-  );
+const nameReducer = (state, action) => {
+  switch (action.type) {
+    case 'Gentleman':
+      return { ...state, title: 'Gentleman' };
+    case 'Mister':
+      return { ...state, title: 'Mister' };
+    case 'Miss':
+      return { ...state, title: 'Miss' };
+    case 'RESET':
+      return { ...state, title: '' };
+    default:
+      throw new Error(`Unknown action type: ${action.type}`);
+  }
 }
 
-function ChangeName ({changeName}){
+function App() {
+  // Estado inicial como objeto
+  const initialState = { title: '', baseName: 'Dev' };
+  const [state, dispatch] = useReducer(nameReducer, initialState);
   
   return (
-    <div>
-      <button onClick={changeName}>
-        Change name
-      </button>
+    <div className="App">
+      <h1>Hola, {state.title} {state.baseName}!</h1>
+      <button onClick={() => dispatch({ type: 'Gentleman' })}>Gentleman</button>
+      <button onClick={() => dispatch({ type: 'Mister' })}>Mister</button>
+      <button onClick={() => dispatch({ type: 'Miss' })}>Miss</button>
+      <button onClick={() => dispatch({ type: 'RESET' })}>Reset</button>
     </div>
   );
 }

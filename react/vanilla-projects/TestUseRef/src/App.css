@@ -1,0 +1,40 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.app-container h1 {
+  font-size: 3rem;
+  color: #646cff;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.change-button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: #646cff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.change-button:hover {
+  background-color: #535bf2;
+}
+
+.change-button:active {
+  transform: translateY(1px);
+}
