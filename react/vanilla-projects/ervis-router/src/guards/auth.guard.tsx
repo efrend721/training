@@ -1,7 +1,11 @@
 import { useSelector } from "react-redux";
-import { AppStore } from "../redux/store";
+import  type { AppStore } from "../redux/store";
+import { PublicRoutes } from "../models";
+import { Navigate, Outlet } from "react-router-dom";
 
 export const AuthGuard = () => {
     const userState = useSelector((store: AppStore) => store.user);
-    return userState.id > 0 ? <Outlet /> : <Navigate replace to  />;
+    return userState.name ? <Outlet /> : <Navigate replace to={PublicRoutes.LOGIN} />;
 }
+
+export default AuthGuard;
