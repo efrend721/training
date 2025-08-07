@@ -6,10 +6,10 @@ import { RoutesWithNotFound } from "./utilities";
 import { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { Logout } from "./components/Logout";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Private = lazy(() => import("./pages/Private/Private"));
-
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
       <Suspense fallback={<>Loading...</>}>
         <Provider store={store}>
           <BrowserRouter>
+            <Logout />
             <RoutesWithNotFound>
               <Route
                 path="/"

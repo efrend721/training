@@ -1,26 +1,35 @@
-import { getMorty } from "../../services";
-import  { useDispatch } from "react-redux";
-import { createUser } from "../../redux/states/user";
-
-
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { PrivateRoutes, PublicRoutes, Roles } from '../../models';
+import { createUser, resetUser, UserKey } from '../../redux/states/user';
+import { getMorty } from '../../services';
+import { clearLocalStorage } from '../../utilities';
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    clearLocalStorage(UserKey);
+    dispatch(resetUser());
+    navigate(`/${PublicRoutes.LOGIN}`, { replace: true });
+  }, [dispatch, navigate]);
+
   const login = async () => {
     try {
       const result = await getMorty();
-      dispatch(createUser(result));
+      dispatch(createUser({ ...result, rol: Roles.USER }));
+      navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
     } catch (error) {
-      console.error("Error fetching Morty:", error);
+      console.error('Login failed:', error);
     }
   };
-
   return (
     <div>
-      <h2>Hola este es nuestro Login</h2>
-      <button onClick={login}>Login</button>
+      <h2>HOLA ESTE ES EL LOGIN</h2>
+      <button onClick={login}>LOGIN</button>
     </div>
   );
-
 }
 export default Login;

@@ -1,7 +1,7 @@
-import { Navigate, Route } from "react-router-dom";
-import { PrivateRoutes } from "../../models";
-import { RoutesWithNotFound } from "../../utilities";
-import { lazy } from "react";
+import { lazy } from 'react';
+import { Navigate, Route } from 'react-router-dom';
+import { PrivateRoutes } from '../../models';
+import { RoutesWithNotFound } from '../../utilities';
 
 
 const Dashboard = lazy(() => import("./Dashboard/Dashboard"));
