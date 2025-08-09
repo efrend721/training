@@ -1,7 +1,8 @@
-import { Roles } from "./roles";
+import type { Roles } from "./roles";
+
 export interface UserInfo {
     id: number;
     name: string;
     email: string;
-    rol: Roles;
+    rol?: Roles; // Hacemos rol opcional para manejar estados iniciales
 }

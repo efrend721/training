@@ -5,7 +5,8 @@ import { persistLocalStorage, clearLocalStorage } from "../../utilities";
 export const EmpyUserState: UserInfo = {
     id: 0,
     name: "",
-    email: ""
+    email: "",
+    rol: undefined
 };
 
 
