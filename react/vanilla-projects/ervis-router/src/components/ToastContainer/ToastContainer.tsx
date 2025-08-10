@@ -9,15 +9,21 @@ function ToastContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
     toasts.forEach(toast => {
       if (toast.duration !== 0) {
         const timer = setTimeout(() => {
           dispatch(removeToast(toast.id));
         }, toast.duration || 5000);
-
-        return () => clearTimeout(timer);
+        
+        timers.push(timer);
       }
     });
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
   }, [toasts, dispatch]);
 
   const handleRemove = (id: string) => {
